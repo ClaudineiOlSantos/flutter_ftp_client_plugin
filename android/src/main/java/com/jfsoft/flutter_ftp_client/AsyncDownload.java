@@ -27,30 +27,23 @@ public class AsyncDownload extends AsyncTask<Map, Integer, String> {
      */
     @Override
     protected String doInBackground(Map... maps) {
-        String error = "";
         String fullPath = (String) maps[1].get("path") + maps[1].get("fileName") + "." + maps[1].get("extension");
-        String filename = (String) maps[1].get("fileName") + "." + maps[1].get("extension");
-        String file = (String) maps[1].get("fileName") + "." + maps[1].get("extension");
-        String text = "";
-        if (this.ftp.ftpConnect(maps[0], maps[1])) {
-//            String[] lista = this.ftp.ftpPrintFilesList("/");
-//            for (String t : lista) {
-//                Log.i(TAG, t);
-//            }
+        String filename = maps[1].get("fileName") + "." + maps[1].get("extension");
+        String file = maps[1].get("fileName") + "." + maps[1].get("extension");
+        String text = "", error = "";
 
-            //String s = new File("produtos").getAbsolutePath();
+        if (this.ftp.ftpConnect(maps[0])) {
+
             if (this.ftp.ftpDownload(fullPath, filename, this.context)) {
                 text = this.readFile(file);
-                Log.i(TAG, "Resultado da leitura:  " + text);
                 return text;
             } else {
                 return null;
             }
         } else {
-            String path = (String) maps[1].get("path") + maps[1].get("fileName") + "." + maps[1].get("extension");
-            error = "Não foi possível connectar ao servidor" + path;
+            error = "Não foi possível connectar ao servidor:" + fullPath;
             Log.i(TAG, error);
-            return error;
+            return null;
         }
     }
 

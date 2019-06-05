@@ -8,6 +8,7 @@ import android.util.Log;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.MethodCall;
@@ -38,7 +39,7 @@ public class FlutterFtpClientPlugin implements MethodCallHandler, Application.Ac
 
     @Override
     public void onMethodCall(MethodCall call, Result result) {
-
+        String resultDownload = "";//Result of downloadFile
         if (call.method.equals("getFile")) {
             //Get host data and path data from flutter application.
             _host = call.argument("host");
@@ -47,10 +48,16 @@ public class FlutterFtpClientPlugin implements MethodCallHandler, Application.Ac
             //Connect to FTP server and download file.
             FTPConnect ftpConnect = new FTPConnect();
             AsyncDownload asyncDownload = new AsyncDownload(ftpConnect, this.context);
-            asyncDownload.execute(_host, _path);
+            try {
+                resultDownload = asyncDownload.execute(_host, _path).get();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
-            String resultado = "Executou só n sei pegar o resultado;";
-            result.success(resultado);
+
+            result.success(resultDownload);
         } else if (call.method.equals("uploadFile")) {
             //TODO
         } else {

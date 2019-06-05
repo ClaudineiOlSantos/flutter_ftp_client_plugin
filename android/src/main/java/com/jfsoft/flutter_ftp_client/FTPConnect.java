@@ -14,9 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FTPConnect {
-    private Map<String, String> host = new HashMap<>();
-    private Map<String, String> path = new HashMap<>();
-
     private static final String TAG = "FTPConnect";
     public FTPClient mFTPClient = null;
 
@@ -25,18 +22,17 @@ public class FTPConnect {
      * Method to connect to FTP server:
      *
      * @param host Map<String,String>
-     * @param path host Map<String,String>
      * @return
      */
-    public boolean ftpConnect(Map host, Map path) {
-        this.host = host;
-        this.path = path;
+    public boolean ftpConnect(Map host) {
+        String hostLink = (String) host.get("host");
+        int hostPort = Integer.parseInt((String) host.get("port"));
+
         try {
-            Log.i(TAG, "Debug ftpConnect: " +  host.get("host") +":"+ host.get("port"));
             mFTPClient = new FTPClient();
 
             // connecting to the host
-            mFTPClient.connect((String) host.get("host"), (int) host.get("port"));
+            mFTPClient.connect(hostLink, hostPort);
 
             // now check the reply code, if positive mean connection success
             if (FTPReply.isPositiveCompletion(mFTPClient.getReplyCode())) {
