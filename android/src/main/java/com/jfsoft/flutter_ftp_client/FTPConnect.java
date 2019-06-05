@@ -10,7 +10,6 @@ import org.apache.commons.net.ftp.FTPReply;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.util.HashMap;
 import java.util.Map;
 
 public class FTPConnect {
