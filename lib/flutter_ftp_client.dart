@@ -27,7 +27,11 @@ class FlutterFtpClient {
     return version;
   }
 
-  ///Before attempting to connect to the server, first provide the connection data.
+  /// Antes de tentar se conectar ao servidor forneça os dados de conexão
+  /// [host] Servidor
+  /// [username] Usuário
+  /// [password] Senha
+  /// [port] Porta
   static void configHost(
       String host, String username, String password, String port) {
     _hostData = {
@@ -38,7 +42,10 @@ class FlutterFtpClient {
     };
   }
 
-  ///Files properties
+  /// Forneça as configurações do arquivo
+  /// [path] Caminho do arquivo
+  /// [filename] Nome
+  /// [extension] Extensão ex: txt
   static void configFilePath(String path, String filename, String extension) {
     _path = {
       pathPropert: path,
@@ -47,6 +54,7 @@ class FlutterFtpClient {
     };
   }
 
+  /// Validação dos dados informador
   static void _validateData() {
     if (_hostData == null || _path == null) {
       throw new Exception(

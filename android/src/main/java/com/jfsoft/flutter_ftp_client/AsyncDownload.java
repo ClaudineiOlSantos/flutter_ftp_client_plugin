@@ -6,6 +6,7 @@ import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
@@ -63,13 +64,16 @@ public class AsyncDownload extends AsyncTask<Map, Integer, String> {
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
             String linha = "";
-
+            //Log.i("MeuText","");
             while ((linha = bufferedReader.readLine()) != null) {
                 text += linha;
+                //System.out.println("MEUTXT"+linha+"\n");
             }
+
         } catch (IOException e) {
             Log.e("ERROR", e.toString());
         }
-        return text;
+//        return text;
+        return path;
     }
 }

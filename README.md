@@ -1,6 +1,8 @@
 # flutter_ftp_client
 
-A new Flutter plugin.
+Este plugin fornece uma api simples para acesso FTP baseado no pacote Common-net-3.6
+
+
 
 ## Getting Started
 
