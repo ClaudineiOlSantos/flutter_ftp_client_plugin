@@ -40,11 +40,11 @@ public class FlutterFtpClientPlugin implements MethodCallHandler, Application.Ac
     public void onMethodCall(MethodCall call, Result result) {
         String resultDownload = "";//Result of downloadFile
         if (call.method.equals("getFile")) {
-            //Get host data and path data from flutter application.
+            //Obtem os argumentos de servidor e caminho
             _host = call.argument("host");
             _path = call.argument("path");
 
-            //Connect to FTP server and download file.
+            //Conecta ao servidor e faz o download do arquivo.
             FTPConnect ftpConnect = new FTPConnect();
             AsyncDownload asyncDownload = new AsyncDownload(ftpConnect, this.context);
             try {
@@ -55,10 +55,40 @@ public class FlutterFtpClientPlugin implements MethodCallHandler, Application.Ac
                 e.printStackTrace();
             }
 
+            //Desconecta do servidor
+//            ftpConnect.ftpDisconnect();
+            result.success(resultDownload);
+
+        } else if (call.method.equals("uploadFile")) {
+            //Obtem os argumentos de servidor e caminho
+            _host = call.argument("host");
+            _path = call.argument("path");
+
+            //Conecta ao servidor e faz o download do arquivo.
+            FTPConnect ftpConnect = new FTPConnect();
+//            AsyncDownload asyncDownload = new AsyncDownload(ftpConnect, this.context);
+            AsyncUpload asyncUpload = new AsyncUpload(ftpConnect, this.context);
+            try {
+                resultDownload = asyncUpload.execute(_host, _path).get();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            //Desconecta do servidor
+//            ftpConnect.ftpDisconnect();
 
             result.success(resultDownload);
-        } else if (call.method.equals("uploadFile")) {
-            //TODO
+        } else if (call.method.equals("ftpRenameFile")) {
+        } else if (call.method.equals("ftpRemoveFile")) {
+        } else if (call.method.equals("ftpRemoveDirectory")) {
+        } else if (call.method.equals("ftpMakeDirectory")) {
+        } else if (call.method.equals("ftpPrintFilesList")) {
+        } else if (call.method.equals("ftpChangeDirectory")) {
+        } else if (call.method.equals("ftpGetCurrentWorkingDirectory")) {
+        } else if (call.method.equals("ftpDisconnect")) {
+
         } else {
             result.notImplemented();
         }
@@ -72,36 +102,29 @@ public class FlutterFtpClientPlugin implements MethodCallHandler, Application.Ac
 
     @Override
     public void onActivityCreated(Activity activity, Bundle bundle) {
-
     }
 
     @Override
     public void onActivityStarted(Activity activity) {
-
     }
 
     @Override
     public void onActivityResumed(Activity activity) {
-
     }
 
     @Override
     public void onActivityPaused(Activity activity) {
-
     }
 
     @Override
     public void onActivityStopped(Activity activity) {
-
     }
 
     @Override
     public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
-
     }
 
     @Override
     public void onActivityDestroyed(Activity activity) {
-
     }
 }
