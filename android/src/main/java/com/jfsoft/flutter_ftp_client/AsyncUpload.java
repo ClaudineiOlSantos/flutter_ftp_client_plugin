@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * Classe responsável por executar o upload do arquivo
- *
+ * <p>
  * Esta classe herda da classe AsyncTask para execução de em background
  */
 public class AsyncUpload extends AsyncTask<Map, Integer, String> {
@@ -28,21 +28,20 @@ public class AsyncUpload extends AsyncTask<Map, Integer, String> {
     protected String doInBackground(Map... maps) {
         String fullPath = (String) maps[1].get("path") + maps[1].get("fileName") + "." + maps[1].get("extension");
         String filename = maps[1].get("fileName") + "." + maps[1].get("extension");
-//        String file = maps[1].get("fileName") + "." + maps[1].get("extension");
+        String destinFilePath = maps[1].get("uploadPath") + filename;
 
         if (this.ftp.ftpConnect(maps[0])) {
 
 
-            if (this.ftp.ftpUpload(fullPath, filename, this.context)) {
+            if (this.ftp.ftpUpload(fullPath, destinFilePath, this.context)) {
                 return "Upload executado com sucesso";
             } else {
                 return null;
             }
         } else {
-            return  "Não foi possível connectar ao servidor:" + fullPath;
+            return "Não foi possível connectar ao servidor:" + fullPath;
         }
     }
-
 
 
 }
