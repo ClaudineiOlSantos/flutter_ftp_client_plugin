@@ -56,9 +56,9 @@ class FlutterFtpClient {
     }
   }
 
-    /// Execute de download file from server
-    /// Before attempting to download files please configure the server using
-    /// the [configHost] method and then configure the filePath using the [configFilePath] method.
+  /// Execute de download file from server
+  /// Before attempting to download files please configure the server using
+  /// the [configHost] method and then configure the filePath using the [configFilePath] method.
   static Future<String> get getFile async {
     _validateData();
 
@@ -71,7 +71,7 @@ class FlutterFtpClient {
   }
 
   /// Execute the upload file to server
-  /// 
+  ///
   /// Execute de download file from server
   /// Before attempting to download files please configure the server using
   /// the [configHost] method and then configure the filePath using the [configFilePath] method.
