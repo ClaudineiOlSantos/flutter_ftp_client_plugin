@@ -14,12 +14,16 @@ import java.util.Map;
 
 public class FTPConnect {
     private static final String TAG = "FTPConnect";
-    public FTPClient mFTPClient = null;
+    public FTPClient FTPClient = null;
 
 
     /**
-     * Method to connect to FTP server:
+     * Classe responsável por fazer a conecxão com o servidor:
      *
+     * Disponibiliza alguns metodos para manipulação de arquivos no servidor como:
+     * Upload, download, remoção de arquivo, renomeação, escolha de diretório de trabalho, criação de
+     * diretório entre outros.
+     * 
      * @param host Map<String,String>
      * @return
      */
@@ -28,15 +32,15 @@ public class FTPConnect {
         int hostPort = Integer.parseInt((String) host.get("port"));
 
         try {
-            mFTPClient = new FTPClient();
+            FTPClient = new FTPClient();
 
             // connecting to the host
-            mFTPClient.connect(hostLink, hostPort);
+            FTPClient.connect(hostLink, hostPort);
 
             // now check the reply code, if positive mean connection success
-            if (FTPReply.isPositiveCompletion(mFTPClient.getReplyCode())) {
+            if (FTPReply.isPositiveCompletion(FTPClient.getReplyCode())) {
                 // login using username & password
-                boolean status = mFTPClient.login((String) host.get("username"), (String) host.get("password"));
+                boolean status = FTPClient.login((String) host.get("username"), (String) host.get("password"));
 
                 /*
                  * Set File Transfer Mode
@@ -46,8 +50,8 @@ public class FTPConnect {
                  * EBCDIC_FILE_TYPE .etc. Here, I use BINARY_FILE_TYPE for
                  * transferring text, image, and compressed files.
                  */
-                mFTPClient.setFileType(FTP.BINARY_FILE_TYPE);
-                mFTPClient.enterLocalPassiveMode();
+                FTPClient.setFileType(FTP.BINARY_FILE_TYPE);
+                FTPClient.enterLocalPassiveMode();
 
                 return status;
             }
@@ -59,12 +63,12 @@ public class FTPConnect {
     }
 
     /**
-     * Method to disconnect from FTP server:
+     * Desconecta do servidor:
      */
     public boolean ftpDisconnect() {
         try {
-            mFTPClient.logout();
-            mFTPClient.disconnect();
+            FTPClient.logout();
+            FTPClient.disconnect();
             return true;
         } catch (Exception e) {
             Log.d(TAG, "Error occurred while disconnecting from ftp server.");
@@ -74,14 +78,14 @@ public class FTPConnect {
     }
 
     /**
-     * Method to get current working directory:
+     * Retorna o diretório atual
      *
      * @return String
      */
 
     public String ftpGetCurrentWorkingDirectory() {
         try {
-            String workingDir = mFTPClient.printWorkingDirectory();
+            String workingDir = FTPClient.printWorkingDirectory();
             return workingDir;
         } catch (Exception e) {
             Log.d(TAG, "Error: could not get current working directory.");
@@ -91,7 +95,7 @@ public class FTPConnect {
     }
 
     /**
-     * Method to change working directory:
+     * Escolhe o diretório atual
      *
      * @param directory_path String
      * @return
@@ -99,7 +103,7 @@ public class FTPConnect {
 
     public boolean ftpChangeDirectory(String directory_path) {
         try {
-            mFTPClient.changeWorkingDirectory(directory_path);
+            FTPClient.changeWorkingDirectory(directory_path);
         } catch (Exception e) {
             Log.d(TAG, "Error: could not change directory to " + directory_path);
         }
@@ -108,7 +112,7 @@ public class FTPConnect {
     }
 
     /**
-     * Method to list all files in a directory:
+     * Obtém a lista completa de arquivos presente no diretório
      *
      * @param dir_path String
      * @return String[]
@@ -117,7 +121,7 @@ public class FTPConnect {
     public String[] ftpPrintFilesList(String dir_path) {
         String[] fileList = null;
         try {
-            FTPFile[] ftpFiles = mFTPClient.listFiles(dir_path);
+            FTPFile[] ftpFiles = FTPClient.listFiles(dir_path);
             int length = ftpFiles.length;
             fileList = new String[length];
             for (int i = 0; i < length; i++) {
@@ -140,7 +144,7 @@ public class FTPConnect {
     }
 
     /**
-     * Method to create new directory:
+     * Cria um diretório:
      *
      * @param new_dir_path
      * @return String
@@ -148,7 +152,7 @@ public class FTPConnect {
 
     public boolean ftpMakeDirectory(String new_dir_path) {
         try {
-            boolean status = mFTPClient.makeDirectory(new_dir_path);
+            boolean status = FTPClient.makeDirectory(new_dir_path);
             return status;
         } catch (Exception e) {
             Log.d(TAG, "Error: could not create new directory named "
@@ -159,7 +163,7 @@ public class FTPConnect {
     }
 
     /**
-     * Method to delete/remove a directory:
+     * Remove um diretório
      *
      * @param dir_path
      * @return String
@@ -167,7 +171,7 @@ public class FTPConnect {
 
     public boolean ftpRemoveDirectory(String dir_path) {
         try {
-            boolean status = mFTPClient.removeDirectory(dir_path);
+            boolean status = FTPClient.removeDirectory(dir_path);
             return status;
         } catch (Exception e) {
             Log.d(TAG, "Error: could not remove directory named " + dir_path);
@@ -177,7 +181,7 @@ public class FTPConnect {
     }
 
     /**
-     * Method to delete a file:
+     * Metodo para remover um arquivo
      *
      * @param filePath String
      * @return boolean
@@ -185,7 +189,7 @@ public class FTPConnect {
 
     public boolean ftpRemoveFile(String filePath) {
         try {
-            boolean status = mFTPClient.deleteFile(filePath);
+            boolean status = FTPClient.deleteFile(filePath);
             return status;
         } catch (Exception e) {
             e.printStackTrace();
@@ -195,7 +199,7 @@ public class FTPConnect {
     }
 
     /**
-     * Method to rename a file:
+     * Metodo para renomear um rquivo
      *
      * @param from String
      * @param to   String
@@ -204,7 +208,7 @@ public class FTPConnect {
 
     public boolean ftpRenameFile(String from, String to) {
         try {
-            boolean status = mFTPClient.rename(from, to);
+            boolean status = FTPClient.rename(from, to);
             return status;
         } catch (Exception e) {
             Log.d(TAG, "Could not rename file: " + from + " to: " + to);
@@ -216,7 +220,7 @@ public class FTPConnect {
     // Method to download a file from FTP server:
 
     /**
-     * mFTPClient: FTP client connection object (see FTP connection example)
+     * FTPClient: FTP client connection object (see FTP connection example)
      * srcFilePath: path to the source file in FTP server desFilePath: path to
      * the destination file to be saved in sdcard
      *
@@ -231,7 +235,7 @@ public class FTPConnect {
             //FileOutputStream desFileStream = new FileOutputStream(Environment.getExternalStorageDirectory());
             FileOutputStream desFileStream = context.openFileOutput(desFilePath, Context.MODE_PRIVATE);
 
-            status = mFTPClient.retrieveFile(srcFilePath, desFileStream);
+            status = FTPClient.retrieveFile(srcFilePath, desFileStream);
             desFileStream.close();
 
             return status;
@@ -245,27 +249,26 @@ public class FTPConnect {
     // Method to upload a file to FTP server:
 
     /**
-     * mFTPClient: FTP client connection object (see FTP connection example)
+     * FTPClient: FTP client connection object (see FTP connection example)
      * srcFilePath: source file path in sdcard desFileName: file name to be
      * stored in FTP server desDirectory: directory path where the file should
      * be upload to
      *
      * @param srcFilePath  String
      * @param desFileName  String
-     * @param desDirectory String
      * @param context      Context
      * @return boolean
      */
 
     public boolean ftpUpload(String srcFilePath, String desFileName,
-                             String desDirectory, Context context) {
+                             Context context) {
         boolean status = false;
         try {
             FileInputStream srcFileStream = new FileInputStream(srcFilePath);
 
             // change working directory to the destination directory
             // if (ftpChangeDirectory(desDirectory)) {
-            status = mFTPClient.storeFile(desFileName, srcFileStream);
+            status = FTPClient.storeFile(desFileName, srcFileStream);
             // }
 
             srcFileStream.close();

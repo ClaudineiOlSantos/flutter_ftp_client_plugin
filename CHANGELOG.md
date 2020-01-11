@@ -1,3 +1,7 @@
-## 0.0.1
+## 1.0.0
 
-* TODO: Describe initial release.
+* Creation and implementation all methods.
+
+## 1.0.1
+
+* Implementation of plugin Documentation.

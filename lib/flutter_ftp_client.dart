@@ -10,6 +10,7 @@ final String portPropert = "port";
 final String pathPropert = "path";
 final String fileNamePropert = "fileName";
 final String extensionfilePropert = "extension";
+final String uploadPathPropert = "uploadPath";
 
 class FlutterFtpClient {
   static Map<String, String> _hostData;
@@ -23,7 +24,16 @@ class FlutterFtpClient {
 
     //Send data to native environment
     final String version = await _channel
-        .invokeMethod('getFile', {"host": _hostData, "path": _path});
+        .invokeMethod('getFile', {hostPropert: _hostData, pathPropert: _path});
+    return version;
+  }
+
+  static Future<String> get uploadFile async {
+    _validateData();
+
+    //Send data to native environment
+    final String version = await _channel
+        .invokeMethod('uploadFile', {hostPropert: _hostData, pathPropert: _path});
     return version;
   }
 
@@ -46,17 +56,18 @@ class FlutterFtpClient {
   /// [path] Caminho do arquivo
   /// [filename] Nome
   /// [extension] Extensão ex: txt
-  static void configFilePath(String path, String filename, String extension) {
+  static void configFilePath(String path, String filename, String extension,{uploadPath:String}) {
     _path = {
       pathPropert: path,
       fileNamePropert: filename,
-      extensionfilePropert: extension
+      extensionfilePropert: extension,
+      uploadPathPropert:uploadPath
     };
   }
 
   /// Validação dos dados informador
   static void _validateData() {
-    if (_hostData == null || _path == null) {
+    if (_hostData[hostPropert] == null || _path[pathPropert] == null) {
       throw new Exception(
           "Configure the server first before attempting to connect.");
     }

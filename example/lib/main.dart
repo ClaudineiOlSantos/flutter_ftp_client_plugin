@@ -25,12 +25,12 @@ class _MyAppState extends State<MyApp> {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-//      FlutterFtpClient.configHost("192.168.1.116", "claudinei", "5c6h1224", "21");
-//      FlutterFtpClient.configFilePath("/", "produtos","txt");
-      FlutterFtpClient.configHost(
-          "embapel.ddns.net", "cliente", "yamaha", "9761");
-      FlutterFtpClient.configFilePath(
-          "/Download/Publico/Embapel1cliente/", "Embapel1cliente", "txt");
+      FlutterFtpClient.configHost("192.168.1.116", "claudinei", "5c6h1224", "21");
+      FlutterFtpClient.configFilePath("/", "produtos","txt");
+//      FlutterFtpClient.configHost(
+//          "127.0", "cliente", "yamaha", "9761");
+//      FlutterFtpClient.configFilePath(
+//          "/Download/Publico/Embapel1cliente/", "Embapel1cliente", "txt");
       platformVersion = await FlutterFtpClient.getFile;
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';

@@ -1,16 +1,54 @@
 # flutter_ftp_client
 
-Este plugin fornece uma api simples para acesso FTP baseado no pacote Common-net-3.6
-
-
+This plugin provide an simple API to FTP acess, Common-net-3.6 based.
+Currently only available for android platform.
 
 ## Getting Started
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.io/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+In your pubspac file
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+````
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_ftp_client:
+    path: ..\flutter_ftp_client #Path to pub.dev
+```
+
+### Config host
+
+First to try connect, provide host 
+Antes
+```
+  FlutterFtpClient.configHost(host, username, password, port);
+```
+
+### Config path
+
+```
+FlutterFtpClient.configFilePath(path, filename, extension,
+        uploadPath: uploadPath);
+```
+
+### Download File
+
+The method getFile execute the download of file and return your filename.
+Use the filename to manipulate the file in your app.
+
+```
+   String filename = await FlutterFtpClient.getFile;
+```
+
+### Upload File
+
+The method getFile execute the upload of file.
+Use the filename to manipulate the file in your app.
+
+```
+    // Set destination path
+    configFilePath(path, filename,
+            extension: extension, uploadPath: uploadPath);
+
+    /// Execute o upload file
+    return FlutterFtpClient.uploadFile;
+```

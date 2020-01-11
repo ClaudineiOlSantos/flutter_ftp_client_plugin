@@ -6,11 +6,15 @@ import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
 
+/**
+ * Classe responsável por executar o upload do arquivo
+ *
+ * Esta classe herda da classe AsyncTask para execução de em background
+ */
 public class AsyncDownload extends AsyncTask<Map, Integer, String> {
     private FTPConnect ftp;
     private Context context;
@@ -23,7 +27,7 @@ public class AsyncDownload extends AsyncTask<Map, Integer, String> {
 
     /**
      * @param maps varags  map[0] = host and map[1]=path
-     * @return
+     * @return String
      */
     @Override
     protected String doInBackground(Map... maps) {
@@ -33,7 +37,6 @@ public class AsyncDownload extends AsyncTask<Map, Integer, String> {
         String text = "", error = "";
 
         if (this.ftp.ftpConnect(maps[0])) {
-
             if (this.ftp.ftpDownload(fullPath, filename, this.context)) {
                 text = this.readFile(file);
                 return text;
@@ -42,7 +45,6 @@ public class AsyncDownload extends AsyncTask<Map, Integer, String> {
             }
         } else {
             error = "Não foi possível connectar ao servidor:" + fullPath;
-            Log.i(TAG, error);
             return null;
         }
     }
