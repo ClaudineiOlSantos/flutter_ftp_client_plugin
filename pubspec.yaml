@@ -1,8 +1,8 @@
 name: flutter_ftp_client
-description: A new Flutter plugin.
+description: A simple plugin to acess FTP for Android.
 version: 1.0.1
-author:
-homepage:
+author: Claudinei O. Santos <dineyrock19@gmail.com>
+homepage: https://github.com/ClaudineiOlSantos/
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
