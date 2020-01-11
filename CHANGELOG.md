@@ -33,3 +33,7 @@
 ## 1.0.8
 
 * IMPROVEMENT - Formatting the dart code and adding more information to the pubspec description.
+
+## 1.0.9
+
+* FEATURE - implemente exemple/README.md demonstration use.

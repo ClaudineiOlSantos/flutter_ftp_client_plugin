@@ -4,13 +4,38 @@ Demonstrates how to use the flutter_ftp_client plugin.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+* 1 - Provide the host credentials.
+* 2 - Provide the file path and extention.
+* 3 - Download or upload file using FlutterFtpClient.getFile and FlutterFtpClient.uploadFile methods.
 
-A few resources to get you started if this is your first Flutter project:
+### Download demonstration
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+Demonstrates how to download files using Flutter FTP Client.
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+```
+    /// set credentials
+    FlutterFtpClient.configHost("111.111.1.111", "user", "password", "21");
+
+    /// set file path and extention.
+    FlutterFtpClient.configFilePath("/", "products","txt");
+
+    /// download file and get the filename
+    filename = await FlutterFtpClient.getFile;
+```
+
+### Upload demonstration
+
+Demonstrates how to upload files using Flutter FTP Client.
+
+```
+    /// set credentials.
+    FlutterFtpClient.configHost("111.111.1.111", "user", "password", "21");
+
+    /// set file path and extention.
+    FlutterFtpClient.configFilePath("/", "order", "txt", uploadPath: "/destineFolder");
+
+    /// upload file.
+    filename = await FlutterFtpClient.uploadFile;
+```
+
+For more information access [Flutter FTP Client on GitHub](https://github.com/ClaudineiOlSantos/lutter_ftp_client_plugin)
