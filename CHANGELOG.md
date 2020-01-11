@@ -5,3 +5,15 @@
 ## 1.0.1
 
 * Implementation of plugin Documentation.
+
+## 1.0.2
+
+* Implementation of plugin Documentation.
+
+## 1.0.3
+
+* FIX - Documentation.
+
+## 1.0.4
+
+* FIX - pubspec.yaml.
