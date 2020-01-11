@@ -19,24 +19,6 @@ class FlutterFtpClient {
   static const MethodChannel _channel =
       const MethodChannel('flutter_ftp_client');
 
-  static Future<String> get getFile async {
-    _validateData();
-
-    //Send data to native environment
-    final String version = await _channel
-        .invokeMethod('getFile', {hostPropert: _hostData, pathPropert: _path});
-    return version;
-  }
-
-  static Future<String> get uploadFile async {
-    _validateData();
-
-    //Send data to native environment
-    final String version = await _channel.invokeMethod(
-        'uploadFile', {hostPropert: _hostData, pathPropert: _path});
-    return version;
-  }
-
   /// Antes de tentar se conectar ao servidor forneça os dados de conexão
   /// [host] Servidor
   /// [username] Usuário
@@ -66,11 +48,41 @@ class FlutterFtpClient {
     };
   }
 
-  /// Validação dos dados informador
+  /// Validate host credentials
   static void _validateData() {
     if (_hostData[hostPropert] == null || _path[pathPropert] == null) {
       throw new Exception(
           "Configure the server first before attempting to connect.");
     }
+  }
+
+    /// Execute de download file from server
+    /// Before attempting to download files please configure the server using
+    /// the [configHost] method and then configure the filePath using the [configFilePath] method.
+  static Future<String> get getFile async {
+    _validateData();
+
+    /// Send data to native environment
+    final String filename = await _channel
+        .invokeMethod('getFile', {hostPropert: _hostData, pathPropert: _path});
+
+    /// Returns the file name downloaded from the server.
+    return filename;
+  }
+
+  /// Execute the upload file to server
+  /// 
+  /// Execute de download file from server
+  /// Before attempting to download files please configure the server using
+  /// the [configHost] method and then configure the filePath using the [configFilePath] method.
+  static Future<String> get uploadFile async {
+    _validateData();
+
+    /// Send data to native environment
+    final String filename = await _channel.invokeMethod(
+        'uploadFile', {hostPropert: _hostData, pathPropert: _path});
+
+    /// Returns the file name uploaded from the server.
+    return filename;
   }
 }
