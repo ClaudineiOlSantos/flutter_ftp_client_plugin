@@ -38,4 +38,4 @@ Demonstrates how to upload files using Flutter FTP Client.
     filename = await FlutterFtpClient.uploadFile;
 ```
 
-For more information access [Flutter FTP Client on GitHub](https://github.com/ClaudineiOlSantos/lutter_ftp_client_plugin)
+For more information access [Flutter FTP Client on GitHub](https://github.com/ClaudineiOlSantos/flutter_ftp_client_plugin)
