@@ -11,8 +11,7 @@ In your pubspac file
 dependencies:
   flutter:
     sdk: flutter
-  flutter_ftp_client:
-    path: ..\flutter_ftp_client #Path to pub.dev
+  flutter_ftp_client: ^1.0.3
 ```
 
 ### Config host
