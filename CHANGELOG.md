@@ -29,3 +29,7 @@
 ## 1.0.7
 
 * Fix - Platform suport pubspec.
+
+## 1.0.8
+
+* IMPROVEMENT - Formatting the dart code and adding more information to the pubspec description.

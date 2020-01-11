@@ -32,8 +32,8 @@ class FlutterFtpClient {
     _validateData();
 
     //Send data to native environment
-    final String version = await _channel
-        .invokeMethod('uploadFile', {hostPropert: _hostData, pathPropert: _path});
+    final String version = await _channel.invokeMethod(
+        'uploadFile', {hostPropert: _hostData, pathPropert: _path});
     return version;
   }
 
@@ -56,12 +56,13 @@ class FlutterFtpClient {
   /// [path] Caminho do arquivo
   /// [filename] Nome
   /// [extension] Extensão ex: txt
-  static void configFilePath(String path, String filename, String extension,{uploadPath:String}) {
+  static void configFilePath(String path, String filename, String extension,
+      {uploadPath: String}) {
     _path = {
       pathPropert: path,
       fileNamePropert: filename,
       extensionfilePropert: extension,
-      uploadPathPropert:uploadPath
+      uploadPathPropert: uploadPath
     };
   }
 
