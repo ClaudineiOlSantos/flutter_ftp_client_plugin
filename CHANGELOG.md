@@ -17,3 +17,7 @@
 ## 1.0.4
 
 * FIX - pubspec.yaml.
+
+## 1.0.5
+
+* FIX - GithubLink.
