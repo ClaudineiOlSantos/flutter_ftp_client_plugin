@@ -1,4 +1,4 @@
-# flutter_ftp_client_example
+# Flutter FTP Client Example
 
 Demonstrates how to use the flutter_ftp_client plugin.
 

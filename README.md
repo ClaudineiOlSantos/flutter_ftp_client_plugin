@@ -1,4 +1,4 @@
-# flutter_ftp_client
+# Flutter FTP Client
 
 This plugin provide an simple API to FTP access and manager files, Common-net-3.6 based.
 Currently only available for android platform.
