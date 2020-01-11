@@ -7,7 +7,7 @@ Currently only available for android platform.
 
 In your pubspac file
 
-````
+```
 dependencies:
   flutter:
     sdk: flutter
