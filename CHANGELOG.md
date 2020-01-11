@@ -21,3 +21,7 @@
 ## 1.0.5
 
 * FIX - GithubLink.
+
+## 1.0.6
+
+* IMPROVMENT - Documentation.

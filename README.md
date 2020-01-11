@@ -5,25 +5,17 @@ Currently only available for android platform.
 
 ## Getting Started
 
-In your pubspac file
-
-```
-dependencies:
-  flutter:
-    sdk: flutter
-  flutter_ftp_client: ^1.0.3
-```
-
 ### Config host
 
-First to try connect, provide host 
-Antes
+First provide the host config
+
 ```
   FlutterFtpClient.configHost(host, username, password, port);
 ```
 
 ### Config path
 
+Config the path and filename from download.
 ```
 FlutterFtpClient.configFilePath(path, filename, extension,
         uploadPath: uploadPath);
@@ -40,8 +32,8 @@ Use the filename to manipulate the file in your app.
 
 ### Upload File
 
-The method getFile execute the upload of file.
-Use the filename to manipulate the file in your app.
+The method uploadFile execute the upload of file to server.
+Use the uploadFile to manipulate the file in your app.
 
 ```
     // Set destination path
