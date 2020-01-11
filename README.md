@@ -1,6 +1,6 @@
 # flutter_ftp_client
 
-This plugin provide an simple API to FTP acess, Common-net-3.6 based.
+This plugin provide an simple API to FTP access and manager files, Common-net-3.6 based.
 Currently only available for android platform.
 
 ## Getting Started
@@ -33,7 +33,6 @@ Use the filename to manipulate the file in your app.
 ### Upload File
 
 The method uploadFile execute the upload of file to server.
-Use the uploadFile to manipulate the file in your app.
 
 ```
     // Set destination path

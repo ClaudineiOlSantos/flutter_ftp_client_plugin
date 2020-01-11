@@ -1,10 +1,10 @@
 ## 1.0.0
 
-* Creation and implementation all methods.
+* Creation and implementation of download method.
 
 ## 1.0.1
 
-* Implementation of plugin Documentation.
+* Implementation of upload method.
 
 ## 1.0.2
 
@@ -25,3 +25,7 @@
 ## 1.0.6
 
 * IMPROVMENT - Documentation.
+
+## 1.0.7
+
+* Fix - Platform suport pubspec.
